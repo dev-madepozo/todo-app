@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-import { healthService } from "../services/health.service.js";
-import { ApiResponse } from "../utils/api-response.js";
+import { healthService } from "./health.service.js";
+import { ApiResponse } from "../../shared/http/api-response.js";
 
 class HealthController {
   getHealth(_: Request, res: Response) {
