@@ -1,7 +1,7 @@
 import { TodoController } from "./controllers/todo.controller";
-import { InMemoryTodoRepository } from "./repositories/in-memory-todo.repository";
+import { PrismaTodoRepository } from "./repositories/prisma-todo.repository";
 import { TodoService } from "./services/todo.service";
 
-const repository = new InMemoryTodoRepository();
+const repository = new PrismaTodoRepository();
 const service = new TodoService(repository);
 export const todoController = new TodoController(service);

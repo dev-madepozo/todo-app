@@ -25,7 +25,7 @@ export class InMemoryTodoRepository implements TodoRepository {
       id: randomUUID(),
       title: data.title,
       completed: false,
-      createAt: now,
+      createdAt: now,
       updatedAt: now,
     };
 
