@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsup src/server.ts --format esm --clean",
     "start": "node dist/server.js",
     "seed": "tsx prisma/seed.ts",
     "typecheck": "tsc --noEmit"
@@ -13,13 +13,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.9.0",
-      "onFail": "download"
-    }
-  },
   "type": "module",
   "dependencies": {
     "@prisma/client": "^6.19.3",
