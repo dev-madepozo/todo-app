@@ -5,12 +5,19 @@ import { UpdateTodoDto } from "../dto/update-todo.dto";
 import { Todo } from "../entities/todo.entity";
 
 import { TodoRepository } from "./todo.repository";
+import { QueryTodoDto } from "../dto/query-todo.dto";
 
 export class InMemoryTodoRepository implements TodoRepository {
   private todos: Todo[] = [];
 
-  async findAll(): Promise<Todo[]> {
-    return this.todos;
+  async findAll(query: QueryTodoDto): Promise<{
+    data: Todo[];
+    total: number;
+  }> {
+    return {
+      data: this.todos,
+      total: this.todos.length
+    };
   }
 
   async findById(id: string): Promise<Todo | null> {
