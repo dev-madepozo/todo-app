@@ -1,4 +1,4 @@
-import { AppError } from "../../../shared/errors/app-error";
+import { NotFoundError } from "../../../shared/errors/not-found-error";
 import { PaginationResponse } from "../../../shared/types/pagination";
 
 import { CreateTodoDto } from "../dto/create-todo.dto";
@@ -11,7 +11,7 @@ export class TodoService {
   constructor(private readonly repository: TodoRepository) {}
 
   async findAll(query: QueryTodoDto): Promise<PaginationResponse<Todo>> {
-    console.log("✅ Query >>>", query)
+    console.log("✅ Query >>>", query);
     const result = await this.repository.findAll(query);
 
     return {
@@ -20,18 +20,16 @@ export class TodoService {
         page: query.page,
         limit: query.limit,
         total: result.total,
-        pages: Math.ceil(
-          result.total / query.limit
-        )
-      }
-    }
+        pages: Math.ceil(result.total / query.limit),
+      },
+    };
   }
 
   async findById(id: string): Promise<Todo> {
     const todo = await this.repository.findById(id);
 
     if (!todo) {
-      throw new AppError("Todo not found", 404)
+      throw new NotFoundError("Todo not found");
     }
 
     return todo;
@@ -45,19 +43,19 @@ export class TodoService {
     const todo = await this.repository.update(id, data);
 
     if (!todo) {
-      throw new AppError("Todo not found", 404)
+      throw new NotFoundError("Todo not found");
     }
 
-    return todo
+    return todo;
   }
 
   async delete(id: string): Promise<boolean> {
     const deleted = await this.repository.delete(id);
 
     if (!deleted) {
-      throw new AppError("Todo not found", 404);
+      throw new NotFoundError("Todo not found");
     }
 
-    return deleted
+    return deleted;
   }
 }

@@ -17,12 +17,12 @@ router.get(
 router.get("/todos/:id", asyncHandler(todoController.findById));
 router.post(
   "/todos",
-  validate(CreateTodoSchema),
+  validate(CreateTodoSchema, "body"),
   asyncHandler(todoController.create),
 );
 router.put(
   "/todos/:id",
-  validate(UpdateTodoSchema),
+  validate(UpdateTodoSchema, "body"),
   asyncHandler(todoController.update),
 );
 router.delete("/todos/:id", asyncHandler(todoController.delete));

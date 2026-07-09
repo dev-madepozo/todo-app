@@ -4,19 +4,19 @@ import { AppError } from "../shared/errors/app-error";
 import { logger } from "../config/logger";
 
 export function errorMiddleware(
-  err: Error,
+  error: Error,
   _req: Request,
   res: Response,
   _next: NextFunction,
 ) {
-  if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
+  if (error instanceof AppError) {
+    return res.status(error.statusCode).json({
       success: false,
-      message: err.message,
+      message: error.message,
     });
   }
 
-  logger.error(err);
+  logger.error(error);
 
   return res.status(500).json({
     success: false,

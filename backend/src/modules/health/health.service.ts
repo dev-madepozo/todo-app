@@ -1,8 +1,14 @@
+import { env } from "../../config";
+
+import packageJson from "../../../package.json" with { type: "json" };
+
 export class HealthService {
   getHealth() {
     return {
-      succes: true,
-      message: 'Server is running',
+      status: "ok",
+      version: packageJson.version,
+      environment: env.NODE_ENV,
+      uptime: Math.floor(process.uptime()),
       timestamp: new Date().toISOString(),
     };
   }
