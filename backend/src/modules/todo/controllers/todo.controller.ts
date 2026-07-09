@@ -2,14 +2,16 @@ import { Request, Response } from "express";
 
 import { ApiResponse } from "../../../shared/http/api-response";
 import { TodoService } from "../services/todo.service";
+import { QueryTodoDto } from "../dto/query-todo.dto";
 
 export class TodoController {
   constructor(private readonly service: TodoService) {}
 
-  findAll = async (_: Request, res: Response) => {
-    const todos = await this.service.findAll();
+  findAll = async (req: Request, res: Response) => {
+    const query = res.locals.query as QueryTodoDto
+    const result = await this.service.findAll(query);
 
-    return ApiResponse.success(res, todos, "Todos retrieved successfully!");
+    return ApiResponse.success(res, result, "Todos retrieved successfully!");
   };
 
   findById = async (req: Request, res: Response) => {

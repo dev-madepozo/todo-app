@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { AppError } from "../shared/errors/app-error";
+import { logger } from "../config/logger";
 
 export function errorMiddleware(
   err: Error,
@@ -15,7 +16,7 @@ export function errorMiddleware(
     });
   }
 
-  console.error(err);
+  logger.error(err);
 
   return res.status(500).json({
     success: false,
